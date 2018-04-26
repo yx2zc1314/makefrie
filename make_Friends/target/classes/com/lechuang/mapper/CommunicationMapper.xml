@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lechuang.mapper.CommunicationMapper">
+    
+	<insert id="sendInvitation" parameterType="com.lechuang.bean.Communication">
+	    INSERT INTO communication(i_open_id,b_open_id,status,distance,suitability) VALUE(#{i_open_id},#{b_open_id},#{status},#{distance},#{suitability})
+	</insert>
+	<update id="acceptInvitation" parameterType="com.lechuang.bean.Communication">
+	    UPDATE communication SET status=1 WHERE i_open_id= #{i_open_id} AND b_open_id= #{b_open_id}
+	</update>
+	<update id="rejectInvitation" parameterType="com.lechuang.bean.Communication">
+	    UPDATE communication SET status=2 WHERE i_open_id= #{i_open_id} AND b_open_id= #{b_open_id}
+	</update>
+	<!-- SELECT * FROM communication WHERE b_open_id=#{u_open_id} AND STATUS=0查询我被谁邀请id -->
+	<!-- u.u_open_id=c.i_open_id根据关联关系，获取邀请我的人的信息 -->
+	<select id="select_B_Invited" parameterType="java.lang.String" resultType="com.lechuang.bean.Invited">
+	    SELECT u.u_name,u.u_l_name,u.sex,c.i_open_id,c.b_open_id,c.distance,c.suitability FROM USER AS u,(SELECT * FROM communication WHERE b_open_id=#{u_open_id} AND STATUS=0) AS c WHERE u.u_open_id=c.i_open_id
+	</select>
+	<!-- SELECT * FROM communication WHERE i_open_id=#{u_open_id} AND STATUS=1，查询我邀请的人，同意了我的邀请 -->
+	<!-- u.u_open_id=c.b_open_id根据这个关联关系，获取被我邀请并同意的人的信息 -->
+	<select id="select_B_Accept" parameterType="java.lang.String" resultType="com.lechuang.bean.Invited">
+	    SELECT u.u_name,u.u_l_name,u.sex,c.i_open_id,c.b_open_id,c.distance,c.suitability FROM USER AS u,(SELECT * FROM communication WHERE i_open_id=#{u_open_id} AND STATUS=1) AS c WHERE u.u_open_id=c.b_open_id
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lechuang.mapper.UserMapper">
+       <!-- <cache eviction="LRU" type="com.lechuang.util.RedisCache"/>   --> 
+	<insert id="addUserInfo" parameterType="com.lechuang.bean.User">
+	    INSERT INTO user(u_open_id,u_l_name,sex,u_address)VALUE(#{u_open_id},#{u_l_name},#{sex},#{u_address})
+	</insert>
+	
+	<update id="updateUserDate" parameterType="com.lechuang.bean.User">
+	    UPDATE user
+		<set>
+			u_name = #{u_name},
+			u_date = #{u_date},
+			u_time = #{u_time},
+			latitude = #{latitude},
+			longitude = #{longitude}
+		</set>
+		WHERE u_open_id = #{u_open_id}
+	</update>
+	<update id="updateUserInfo" parameterType="com.lechuang.bean.User">
+	    UPDATE user
+		<set>
+			u_name = #{u_name},
+			u_date = #{u_date},
+			u_address = #{u_address}
+		</set>
+		WHERE u_open_id = #{u_open_id}
+	</update>
+	<update id="updateUserGeocentricism" parameterType="com.lechuang.bean.User">
+	    UPDATE user
+		<set>
+			HIY = #{HIY},
+			JDY = #{JDY},
+			MDJ = #{MDJ},
+			SHH = #{SHH},
+			SYG = #{SYG},
+			TFI = #{TFI},
+			HIY = #{HIY}
+		</set>
+		WHERE u_open_id = #{u_open_id}
+	</update>
+	
+	<select id="selectBy_OpenId" parameterType="java.lang.String" resultType="com.lechuang.bean.User">
+	    SELECT * FROM user WHERE u_open_id=#{u_open_id}
+	</select>
+	<!-- 搜索 selectBy_Sex-->
+	<select id="selectBy_Sex" parameterType="java.lang.String" resultType="com.lechuang.bean.User">
+	    SELECT * FROM user WHERE sex=#{sex}
+	</select>
+</mapper>
