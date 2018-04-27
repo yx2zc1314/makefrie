@@ -1,4 +1,4 @@
-package com.lechuang.util;
+﻿package com.lechuang.util;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -13,8 +13,13 @@ public class AstrologUtil {
 	 * 
 	 * @param url
 	 * @return
-	 * 根据url获取到页面返回的数据
-	 */
+	 * 根
+据url
+获取到
+页面返回
+的数据
+	111111
+ */
 	
 	public String getURLValue(String url) {
 

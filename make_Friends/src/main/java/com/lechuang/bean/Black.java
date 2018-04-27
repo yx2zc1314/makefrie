@@ -1,7 +1,7 @@
-package com.lechuang.bean;
+﻿package com.lechuang.bean;
 
 /**
- * A拉黑了B，SQL（count）查询B被拉黑的次数，大于5次，直接封号
+ * A拉黑了B    SQL（count）查询B被拉黑的次数，大于5次，直接封号
  * B不会再被A匹配到
  */
 public class Black {
